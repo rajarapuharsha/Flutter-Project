@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BMI App UI Preview</title>
+    <style>
+      :root {
+        --bg1: #dfe3ea;
+        --chrome: #0f172a;
+        --chrome-2: #1e293b;
+        --chrome-3: #2b3750;
+        --toolbar: #f5f6f8;
+        --panel: #eff1f4;
+        --border: #d5d8dd;
+        --muted: #7a808d;
+        --text: #1f2937;
+        --link: #0f172a;
+        --tab: #f8f9fb;
+      }
+
+      * { box-sizing: border-box; }
+
+      html, body {
+        margin: 0;
+        min-height: 100%;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: var(--bg1);
+        color: var(--text);
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+      }
+
+      .window {
+        width: 100vw;
+        height: 100vh;
+        background: #e9edf1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .browser-bar {
+        height: 56px;
+        background: linear-gradient(180deg, #0d1b2d, #111c33 40%, #0e1729);
+        display: flex;
+        align-items: center;
+        padding: 0 14px;
+        gap: 12px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+
+      .nav-controls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #e5e7eb;
+        font-size: 18px;
+      }
+
+      .dot-btn {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255,255,255,0.75);
+        font-size: 14px;
+      }
+
+      .address-wrap {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .address-bar {
+        width: min(72%, 900px);
+        height: 35px;
+        border-radius: 16px;
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #edf2f7;
+        font-size: 12px;
+        letter-spacing: 0.2px;
+      }
+
+      .right-tools {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        color: #edf2f7;
+        font-size: 16px;
+      }
+
+      .toolbar {
+        height: 56px;
+        background: #f2f4f7;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 20px;
+      }
+
+      .toolbar-inner {
+        width: min(92%, 1280px);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+      }
+
+      .tabs {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .tab {
+        min-width: 170px;
+        max-width: 220px;
+        height: 36px;
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,0.4);
+        border-radius: 12px 12px 0 0;
+        padding: 0 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--link);
+        font-size: 14px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .tab.active {
+        background: #f8fafc;
+        border-bottom-color: #f8fafc;
+      }
+
+      .tab .tiny {
+        width: 12px; height: 12px;
+        border-radius: 3px;
+        background: #d8e1eb;
+        border: 1px solid #a7b7c8;
+      }
+
+      .tab .close {
+        margin-left: auto;
+        color: #778191;
+        font-size: 12px;
+      }
+
+      .browser-content {
+        flex: 1;
+        position: relative;
+        background: #f5f5f5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .empty-surface {
+        width: min(76%, 760px);
+        height: 62%;
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding-top: 28px;
+      }
+
+      .search-row {
+        position: absolute;
+        top: 10px;
+        right: 18px;
+        width: 230px;
+        height: 26px;
+        border-radius: 12px;
+        background: rgba(0,0,0,0.02);
+        border: 1px solid rgba(15,23,42,0.08);
+        color: #667085;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .dir-grid {
+        position: relative;
+        top: 40px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 26px;
+        flex-wrap: wrap;
+      }
+
+      .entry {
+        width: 200px;
+        height: 74px;
+        border: 1px solid #d5d9df;
+        border-radius: 12px;
+        background: rgba(255,255,255,0.15);
+        display: flex;
+        align-items: center;
+        padding: 0 12px;
+        gap: 12px;
+        color: #1f2937;
+        font-size: 14px;
+        box-shadow: 0 0 0 1px rgba(255,255,255,0.3) inset;
+      }
+
+      .entry .icon {
+        width: 22px;
+        height: 22px;
+        border-radius: 4px;
+        background: #dfe5ec;
+        border: 1px solid #b8c2ce;
+        position: relative;
+      }
+
+      .entry .icon.folder::before {
+        content: "";
+        position: absolute;
+        left: 1px; top: 5px;
+        width: 16px; height: 12px;
+        border-radius: 3px 3px 2px 2px;
+        background: #cfd7e2;
+      }
+
+      .entry .icon.file::before {
+        content: "";
+        position: absolute;
+        left: 5px; top: 2px;
+        width: 12px; height: 16px;
+        border-radius: 3px;
+        background: #eef2f7;
+        border: 1px solid #bfc9d5;
+      }
+
+      .entry .icon.info {
+        background: #dfeaf7;
+        border-color: #9bbfe3;
+      }
+
+      .entry .icon.info::before {
+        content: "i";
+        display: block;
+        position: absolute;
+        inset: 0;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 20px;
+        text-align: center;
+        color: #1d4ed8;
+      }
+
+      .top-placeholder {
+        position: absolute;
+        left: 50%;
+        top: 22px;
+        transform: translateX(-50%);
+        width: 150px;
+        height: 18px;
+        border-radius: 20px;
+        opacity: 0.1;
+      }
+
+      .statusbar {
+        height: 48px;
+        background: #f2f4f7;
+        border-top: 1px solid #d2d7dd;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 18px 0 14px;
+        color: #4b5563;
+        font-size: 12px;
+      }
+
+      .status-left, .status-right {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .status-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255,255,255,0.7);
+        border: 1px solid rgba(148,163,184,0.45);
+        border-radius: 10px;
+        padding: 5px 10px;
+      }
+
+      .icn {
+        width: 12px; height: 12px; border-radius: 50%;
+        display: inline-block;
+      }
+
+      .sun { background: #fbbf24; }
+      .search { background: #dfe4ec; }
+      .app { background: #f8fafc; }
+
+      @media (max-width: 900px) {
+        .address-bar { width: 62%; }
+        .tab { min-width: 120px; }
+        .entry { width: 160px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="window">
+      <div class="browser-bar">
+        <div class="nav-controls">
+          <span class="dot-btn">←</span>
+          <span class="dot-btn">→</span>
+          <span class="dot-btn">⟳</span>
+        </div>
+
+        <div class="address-wrap">
+          <div class="address-bar">127.0.0.1:5500</div>
+        </div>
+
+        <div class="right-tools">
+          <span>★</span>
+          <span>⋯</span>
+          <span>◉</span>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <div class="toolbar-inner">
+          <div class="tabs">
+            <div class="tab active"><span class="tiny"></span> bmi_calorie_calculator <span class="close">×</span></div>
+            <div class="tab"><span class="tiny"></span> README.md <span class="close">×</span></div>
+            <div class="tab"><span class="tiny"></span> test.txt <span class="close">×</span></div>
+          </div>
+          <div class="search-row">Search</div>
+        </div>
+      </div>
+
+      <div class="browser-content">
+        <div class="empty-surface">
+          <div class="dir-grid">
+            <div class="entry">
+              <span class="icon folder"></span>
+              <span>bmi_calorie_calculator</span>
+            </div>
+            <div class="entry">
+              <span class="icon info"></span>
+              <span>README.md</span>
+            </div>
+            <div class="entry">
+              <span class="icon file"></span>
+              <span>test.txt</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="statusbar">
+        <div class="status-left">
+          <span class="status-pill"><span class="icn sun"></span> 32°C</span>
+          <span>Partly sunny</span>
+        </div>
+
+        <div class="status-right">
+          <span class="status-pill"><span class="icn search"></span> Search</span>
+          <span class="status-pill"><span class="icn app"></span> 2</span>
+          <span>ENG</span>
+          <span>15:01</span>
+          <span>25-10-2026</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

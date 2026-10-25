@@ -1,0 +1,23 @@
+{
+  "name": "BMI & Calorie Calculator",
+  "short_name": "BMI & Calories",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#F8FAFC",
+  "theme_color": "#0284C7",
+  "description": "Cross-platform BMI and Daily Calorie Calculator built with Flutter.",
+  "orientation": "portrait-primary",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "icons/Icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/Icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
