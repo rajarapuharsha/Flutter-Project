@@ -187,14 +187,10 @@ class AppTheme {
           color: Colors.white,
         ),
       ),
-      cardTheme: const CardTheme(
-        color: cardDark,
-        elevation: 0,
+      cardTheme: const CardThemeData(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-          side: const BorderSide(color: Color(0xFF334155), width: 1),
+        borderRadius: BorderRadius.all(Radius.circular(16)),
         ),
-        margin: EdgeInsets.zero,
       ),
       textSelectionTheme: const TextSelectionThemeData(
         cursorColor: Colors.white,
