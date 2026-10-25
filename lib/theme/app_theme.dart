@@ -187,7 +187,7 @@ class AppTheme {
           color: Colors.white,
         ),
       ),
-      cardTheme: CardTheme(
+      cardTheme: const CardTheme(
         color: cardDark,
         elevation: 0,
         shape: RoundedRectangleBorder(
